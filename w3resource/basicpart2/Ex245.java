@@ -25,7 +25,7 @@ import java.io.InputStreamReader;
  *   
  */
 
-public class Ex215 {
+public class Ex245 {
 	
 	public static void main(String[] args) {
 
@@ -38,8 +38,6 @@ public class Ex215 {
 		BufferedReader br = new BufferedReader(is);
 		
 		try {			
-			
-			// 0이 입력되었을 때 예외처리 하는 방법은 ???
 			
 			System.out.println("대출 기간(월)을 입력해주세요 ");
 			month = Integer.parseInt(br.readLine());
@@ -69,7 +67,7 @@ public class Ex215 {
 	} // main
 	
 	/*
-	 * ㅇ
+	 *  총 부채금액 계산
 	 */
 	
 	static double computeloan (int month, double loan, double interestRate) {
