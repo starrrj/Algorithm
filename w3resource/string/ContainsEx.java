@@ -22,8 +22,8 @@ import java.io.InputStreamReader;
  *  1. 입력 받고
  *  2. 입력 문자열 중 나눌 때 기준이 되는 문자 입력
  *  3. 문자열 비교하여 문자 위치(인덱스) 찾기
- *  4. 기준문자 삭제
- *  4. 문자위치(인덱스) 기준으로 배열에 담기
+ *  4. char ----> 단 문자 
+ *  5. String --> 문장 : 첫 글자를 맞춘 뒤, 다음 글자도 맞는 지 확인하기
  * 
  */
 
@@ -34,8 +34,8 @@ public class ContainsEx {
 		String inputStr = inputStr();
 		String findStr = inputStr();
 		
-//		System.out.println(containsOfStr(inputStr, findStr));
-		System.out.println(containsOfChr(inputStr, findStr));
+		System.out.println(containsOfStr(inputStr, findStr));
+//		System.out.println(containsOfChr(inputStr, findStr));
 
 		
 	} // main
@@ -71,7 +71,7 @@ public class ContainsEx {
 	
 
 	/*
-	 *  2. 입력한 문자열 포함 여부 판단하기 (contains of char)
+	 *  2-1. 입력한 문자열 포함 여부 판단하기 (contains of char)
 	 */
 	public static String containsOfChr (String str1, String str2) {
 		
@@ -97,11 +97,14 @@ public class ContainsEx {
 		
 		return indexOfChr;
 		
-	} // containsOfStr
+	} // containsOfStrg
 	
 	
 	/*
-	 *  2. 입력한 문자열 포함 여부 판단하기 ( contains of string)
+	 *  2-2. 입력한 문자열 포함 여부 판단하기 ( contains of String)
+	 *  
+	 *  최소한의 메소드로 나눠야하는 데... 어떻게 나눠야할까...
+	 *  
 	 */
 	public static boolean containsOfStr (String str1, String str2) {
 		
@@ -114,6 +117,7 @@ public class ContainsEx {
 		// chr2의 길이
 		int chr2Leng =  chr2.length;
 		
+		// 일치하는 문자와 chr2의 개수가 일치하는 지 확인
 		int count = 0;
 		
 		// 먼저 입력한 문장 탐색 
@@ -125,24 +129,19 @@ public class ContainsEx {
 				// 찾을 문자열 탐색
 				for(int j = 0; j < chr2.length; j++) {
 					
-					// 2. chr2[0]을 발견한 인덱스부터 chr2배열 마지막까지 같다면!
-					if (chr1[i+j] == chr2[j]) { 
+					// 2-1. chr2[0]을 발견한 인덱스부터 chr2배열 마지막까지 같은지?
+					if (i+j < chr1.length &&  chr1[i+j] == chr2[j]) { 
 						
 						count ++;
 						
-//						System.out.println(chr2[j] + "&" + chr2[chr2.length-1]);
-//						System.out.println(i + "부터" + (i+chr2.length-1) + "까지");
-					} else {
-						
 						if(chr2Leng == count) {
-						
-							isContains = true; 	// 왜 true가 안나와.....
 							
-						} else {
-							
-							isContains = false; 
+							isContains = true; 	
 							
 						}
+					
+					// 2-2. 다르다면 count 초기화
+					} else {
 						
 						count = 0;
 						
@@ -153,6 +152,7 @@ public class ContainsEx {
 			} // if
 			
 		}// for
+		
 		return isContains;
 		
 	} // containsOfStr
