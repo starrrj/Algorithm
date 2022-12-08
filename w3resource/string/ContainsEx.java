@@ -24,6 +24,7 @@ import java.io.InputStreamReader;
  *  3. 문자열 비교하여 문자 위치(인덱스) 찾기
  *  4. char ----> 단 문자 
  *  5. String --> 문장 : 첫 글자를 맞춘 뒤, 다음 글자도 맞는 지 확인하기
+ *  
  * 
  */
 

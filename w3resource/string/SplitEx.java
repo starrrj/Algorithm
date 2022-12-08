@@ -3,6 +3,9 @@ package string;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /*
  * * ==========================================================
@@ -19,13 +22,6 @@ import java.io.InputStreamReader;
  * 11. 논리적인 로직에서 한번 더 생각하여, 효율적으로 (***)
  * ===========================================================
  * 
- *  1. 문장입력받기
- *  2. 입력 문자열 중 나눌 때 기준이 되는 문자 입력
- *  3. 기준문자 앞의인덱스 까지 자르기
- *  	- 기준문자의 인덱스 번호 찾기
- *  	- 인덱스 번호를 제거 하기
- *  	- 인덱스
- * 
  */
 
 public class SplitEx {
@@ -33,23 +29,117 @@ public class SplitEx {
 	public static void main(String[] agrs) {
 
 		String inputStr = inputStr();
-		String splitStr = inputStr();
+		String splitPointStr = inputStr();
 		
-		String indexNum = findIndexNum(inputStr, splitStr);
+	
+		String result = splitStr(inputStr, splitPointStr);
+//		String result = SplitStrInList(inputStr, splitPointStr);
 		
-		System.out.println(indexNum);
-
+		System.out.println(result);
+		
+		
 	} // main
+	
+	/*
+	 * B. List로 변경 후 remove 값을 넣어서... 지워도 되잖아  ----> ?? 안되는구나..... 완벽한 단어로만 지울수있음
+	 * 그대로 넣는 게 안된다면 char[]로 변경해서 list에 넣는다면? ---> 넣지 못한다 방법이 따로 없을까
+	 * String을 쪼개서 list 에 넣게 된다면?!
+	 */
+	public static String SplitStrInList (String str1, String str2) {
+		
+//		// String -> CharArray 로 변환
+//		char[] chr1 = str1.toCharArray();
+//		char[] chr2 = str2.toCharArray();
+		
+		String result = "";
+		
+		// 베이스가 되는 str1 문자열을 list로 변경하여 제거
+		List<String> list = new ArrayList<>(Arrays.asList(str1));
+		
+		list.remove(str2);
+		
+		System.out.println(list);
+		
+		for(String str: list ) {
+			
+			result += str+"";
+		}
+		
+		return result;
+		
+	} // SplitStrInList
+	
+	
+	
+	/*
+	 * 4. List의 remove 이용하기
+	 */
+	public static String splitStr(String str1, String str2) {
+		
+		// 리턴할 String 결과물
+		String result ="";
+		
+		// 베이스가 되는 str1 문자열을 list로 변경하여 제거
+		List<String> list = new ArrayList<>();
+		
+		// 1. String 쪼개서 list에 넣기
+		for(int i =0; i < str1.length(); i++) {
+			
+			list.add(i, str1.substring(i,i+1));			// substring을 안쓰고 가능한 방법 찾아보기
+		
+		} // for
+		
+		// 2. list 에서 입력값 지우기
+		for (int i = 0; i < str1.length(); i++) {
+
+			list.remove(str2);
+
+		} // for
+		
+		// 3. 제거된 값 깔끔하게 정리...!
+		for(String str : list) {
+			
+			result += str;
+		}
+
+//		System.out.println(result);		// test
+		
+		return result;
+		
+	} //splitStr
+	
+
+	
+	/*
+	 * 3. String --> int[] 로 값 변경
+	 */
+	public static int[] changeIntArr(String str) {
+		
+		// 인덱스 String의 길이만큼 배열 생성
+		int[] intOfindexNum = new int[str.length()];
+		
+		
+		for(int i = 0; i < str.length(); i++) {
+
+			// 인덱스 0의 값부터 변수에 넣어줌
+			intOfindexNum[i] = str.indexOf(i);
+			
+		} // for		
+		
+		return intOfindexNum;
+		
+	} // changeOfIntArr
+	
+	
 
 	/*
-	 * 2. 기준문자 인덱스 번호 찾기
+	 * 2. 기준문자 인덱스 번호 찾아서 반환
 	 */
 	public static String findIndexNum(String str1, String str2) {
 
 		// String -> CharArray 로 변환
 		char[] chr1 = str1.toCharArray();
 		char[] chr2 = str2.toCharArray();
-
 		String firstIndex = "";
 
 		// chr2의 길이
@@ -90,6 +180,7 @@ public class SplitEx {
 
 	} // findIndexNum
 
+	
 	/*
 	 * 1. 문자열 입력(String)
 	 */
