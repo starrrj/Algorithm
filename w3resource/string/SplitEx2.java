@@ -161,7 +161,6 @@ public class SplitEx2 {
 			// 3. 문자열에서 인덱스까지 잘라서 변수저장 (찾은 문자열인덱스 ~ 문자열 끝까지)
 			tailString = tailString.substring(indexNum+1);
 	
-
 //			System.out.println(indexNum);
 //			System.out.println(hadStr);
 //			System.out.println(tailString);

@@ -3,7 +3,8 @@ package string;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
  * * ==========================================================
@@ -39,12 +40,13 @@ public class SplitEx3 {
 		String inputStr = "나비야/나비야/이리/날아오너라";
 		String splitPointStr = "/";
 
-		String[] result = splitStr(inputStr, splitPointStr);
+		List<String> result = splitStr(inputStr, splitPointStr);
 		
-		System.out.println(Arrays.toString(result));
+		for(String str : result) { //for문을 통한 전체출력
+		    System.out.println(str);
+		}
+	
 
-		
-		
 	} // main
 	
 	
@@ -75,116 +77,58 @@ public class SplitEx3 {
 		return str;
 
 	} // InputStr
-
 	
 	
 	/*
-	 *  2. 구분자 문자열의 인덱스 개수 구하기
+	 *  2. 문자열 분리 하여 배열에 담아주기 (Split ***)
 	 */
-	
-	public static int findIndexCnt(String inputStr, String splitStr) {
-
-		// 구분자의 인덱스 개수
-		int indexCnt = 0;
-
-		// 각 문자열의 길이
-		int inputStrLength = inputStr.length();
-		int splitStrLength = splitStr.length();
-		
-		String subString = "";
-
-		// 포함되지 않았을 때 표시할 메세지
-		String message = "찾을 수 없습니다.";
-
-		// 기본문자열에 구분자가 없을 때 메세지 반환
-		if (inputStr.contains(splitStr) == false) {
-
-			System.out.println(message);
-
-			// ======= 검증 끝
-
-		} 
-
-			// 기본 문자열의 길이만큼 탐색하여 구분자 인덱스 찾기
-			for (int i = 0; i < inputStrLength; i++) {
-
-				// 현재 자리에서 구분자의 길이를 더했을 때, 기본문자열보다 같거나 짧아야한다.
-				// 발견한다면 나머지 문자열을 subString에 담아준다.
-				if (i + splitStrLength <= inputStrLength) {
-
-					subString = inputStr.substring(i, i + splitStrLength);
-//					System.out.println("subString : " + subString);
-				} // if #1
-
-				// 나머지 길이에 구분자가 포함되어 있을 때 개수세기
-				if (splitStr.contains(subString)) {
-
-					indexCnt++;
-//					System.out.println(">>indexCnt : " + indexCnt);
-
-				} // if #2
-
-			} // for
-
-			System.out.println("**** 총 구분자 개수는 : " + indexCnt);
-		
-		
-
-		return indexCnt;
-
-	} // findIndex
-	
-	
-	
-	/*
-	 *  3. 문자열 분리 하여 배열에 담아주기 (Split ***)
-	 */
-	public static String[] splitStr (String inputStr, String splitStr) {
-		
-		// 구분자의 인덱스 개수 구하여 변수 저장
-		int indexCnt = findIndexCnt(inputStr, splitStr);
+	public static List<String> splitStr (String inputStr, String splitStr) {
 		
 		// String배열에 저장할 문자열 임시 변수
-		String hadStr;
+		String hadStr = "";
 		
 		// 나머지 문자열을 저장할 변수
 		String tailString = inputStr;
 		
-		// splitStr이 있는 인덱스
-		int indexNum = 0;
-
-		// Size = 구분자 개수 +1 의 배열 생성
-		// Why? 구분자 개수보다
-		String[] splitStrArr = new String[indexCnt + 1];
+		// splitStr이 있는 인덱스 --> while문 진행을 위해 임의의 값을 넣어줌 --> 다른방법없을지 생각해보기! 
+		int indexNum = 1;
 		
-		for(int i = 0; i < indexCnt; i++) {
+		// ArrayList는 사이즈를 명시할 필요가 없다! 데이터 추가할 때 자동증가
+		// ==== > 때문에 배열에 넣을 때 처럼 따로 길이설정 X
+		// ==== > 때문에 split 문자의 개수를 구하지 않아도 됨!
+		List<String> list = new ArrayList<String>();
+
+		// Arraylist에 String 잘라서 값 넣어주기
+
+		while ( indexNum > 0) {
 			
 			// 1. 구분자 문자열의 인덱스를 구함
 			indexNum = tailString.indexOf(splitStr);
 			
-			// 2. 문자열에서 인덱스까지 잘라서 변수저장 (문자열 첫번째~찾은 문자열인덱스 전까지)
-			hadStr = tailString.substring(0, indexNum);
+			// 2. 인덱스 번호를 찾았을 시
+			// 문자열에서 인덱스까지 잘라서 변수저장 (문자열 첫번째~찾은 문자열인덱스 전까지)
+			if (indexNum > 0) {
+				
+				hadStr = tailString.substring(0, indexNum);
+			} // if
 			
 			// 3. 문자열에서 인덱스까지 잘라서 변수저장 (찾은 문자열인덱스 ~ 문자열 끝까지)
-			tailString = tailString.substring(indexNum+1);
-	
-
-//			System.out.println(indexNum);
-//			System.out.println(hadStr);
-//			System.out.println(tailString);
+			tailString = tailString.substring(indexNum + 1);
 			
-			// 4. 규격에 맞게 자른 String을 배열에 넣음
-			splitStrArr[i] = hadStr;
-
-		} // for
+			// 4. 이후 만약 인덱스를 찾지못하면 나머지를 변수저장
+			if (indexNum < 0) {
+				hadStr = tailString;
+			} // if
+			 
+			list.add(hadStr);
 		
-		// 5. 남은 String을 문자열배열 마지막 인덱스에 넣어준다.
-		splitStrArr[indexCnt] = tailString;
+		} // while
 
 		// 배열 리턴
-		return splitStrArr;
-
+		return list;
+		
 	} // splitStr
+
 	
 	
 } // class
