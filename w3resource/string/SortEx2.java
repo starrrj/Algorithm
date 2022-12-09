@@ -215,43 +215,45 @@ public class SortEx2 {
 
 			System.out.println("입력값이 잘못되었습니다. str1:" + standardStr + ", target:" + target);
 
-			// ======== 검증 끝 =========
+			throw new NullPointerException();
+		}
+		
+		// ======== 검증 끝 =========
+		
+		// 1. 만약 같은 문자열인 경우 0 리턴
+		if (standardStr.equals(target)) {
+
+			return result = 0;
+
 		} else {
 
-			// 1. 만약 같은 문자열인 경우 0 리턴
-			if (standardStr.equals(target)) {
+			// 2. 문자 길이만큼 반복 --> 만약 비교문자가 더 짧으면 XX
+			// 따라서 둘 중 더 짧은 길이만큼 반복
+			for (int i = 0; i < commonLength; i++) {
 
-				return result = 0;
+				// 둘의 값이 같지않을 때 ! (같은 때는 생략, 따로 할일 XX)
+				if (standardChr[i] != targetChr[i]) {
 
-			} else {
+					// 2. 기준 값이 비교대상 보다 작은경우(먼저) 음수 리턴
+					if (targetChr[i] < standardChr[i]) {
 
-				// 2. 문자 길이만큼 반복 --> 만약 비교문자가 더 짧으면..?
-				for (int i = 0; i < commonLength; i++) {
+						result = +1;
 
-					if (standardChr[i] != targetChr[i]) {
+						break;
 
-						// 2. 기준 값이 비교대상 보다 작은경우(먼저) 음수 리턴
-						if (targetChr[i] < standardChr[i]) {
+						// 3. 기준 값이 비교대상 보다 큰경우(나중) 양수 리턴
+					} else if (standardChr[i] < targetChr[i]) {
 
-							result = +1;
+						result = -1;
 
-							break;
+						break;
 
-							// 3. 기준 값이 비교대상 보다 큰경우(나중) 양수 리턴
-						} else if (standardChr[i] < targetChr[i]) {
+					} // if-else if
 
-							result = -1;
+				} // if
+			} // for
 
-							break;
-
-						} // if-else if
-
-					} // if
-				} // for
-
-			} // if - else
-
-		} // if
+		} // if - else
 
 		return result;
 	} // compareToStr
