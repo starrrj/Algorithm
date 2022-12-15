@@ -110,15 +110,15 @@ public class SplitEx3 {
 			if (indexNum > 0) {
 				
 				hadStr = tailString.substring(0, indexNum);
-			} // if
-			
-			// 3. 문자열에서 인덱스까지 잘라서 변수저장 (찾은 문자열인덱스 ~ 문자열 끝까지)
-			tailString = tailString.substring(indexNum + 1);
-			
+
+				// 3. 문자열에서 인덱스까지 잘라서 변수저장 (찾은 문자열인덱스 ~ 문자열 끝까지)
+				tailString = tailString.substring(indexNum + 1);
+				
+			} else {
+						
 			// 4. 이후 만약 인덱스를 찾지못하면 나머지를 변수저장
-			if (indexNum < 0) {
 				hadStr = tailString;
-			} // if
+			} // if-else
 			 
 			list.add(hadStr);
 		
