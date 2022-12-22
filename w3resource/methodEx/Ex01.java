@@ -3,6 +3,8 @@ package methodEx;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
  * * ==========================================================
@@ -19,25 +21,31 @@ import java.io.InputStreamReader;
  * 11. 논리적인 로직에서 한번 더 생각하여, 효율적으로 (***)
  * ===========================================================
  * 
- *  문자열의 중간 문자를 표시하는 Java 메소드를 작성하십시오.
- *  참고: a) 문자열의 길이가 홀수인 경우 두 개의 중간 문자가 있습니다.
- *  b) 문자열의 길이가 짝수이면 중간에 하나의 문자가 있습니다.
- *  테스트 데이터: 문자열 입력: 350
- *  예상 출력: 5
- *  
- *  1. 문자열 입력
- *	2. 문자 길이의 중간값 찾기
- *  3. 짝수인지 ? 판별 
- *	3. 중간의 값 출력
+ *  세 개의 숫자 중 가장 작은 숫자를 찾는 Java 메소드를 작성하십시오. 
  *
+ * 	테스트 데이터:
+ * 첫 번째 숫자 입력: 25
+ * 두 번째 숫자 입력: 37
+ * 세 번째 숫자 입력: 29
+ * 
+ * 예상 출력:
+ *  가장 작은 값은 25.0입니다.
+ *  
+ *  음 숫자가 3개가 아닌 여러개가 입력될 때는 어떻게 처리하는 것이 좋을까?
+ *  ArrayList를 이용하여, 입력할 때 마다 list에 넣어준다.
+ *  	이 때, 다른 게 입력되면 list에 담아주는 걸 끝낸다...? 어떻게 마무리를 하는게 좋을까
+ *  sort를 이용하여 정렬을 하고, 그 후 가장 처음에 담겨
  */
 
 public class Ex01 {
 
 	public static void main(String[] args) {
+		
+
 
 	} // main
 
+	
 	/*
 	 * 1. 숫자 입력 (int)
 	 */
@@ -66,78 +74,26 @@ public class Ex01 {
 			System.out.println(messageNumberFormat);
 			System.out.println(e.getMessage());
 
-		} // try-catch
+		} // try-catch-finally
 
 		return num;
 
 	} // inputInt
-
-
-	
-	/*
-	 * 2. 최소값 구하기
-	 */
-	public static int[] changeNumArr(int num1, int num2, int num3) {
-
-		int max; // 최대값
-		int min; // 최소값
-		double middlePoint; // 최대값과 최소값의 중앙값
-		int otherwiseNum; // 나머지 값 = 세개의 숫자 중 최대값 최소값을 제외한 숫자
-
-		boolean isBtweenRanges; // 중앙값이면 true, 아니면 false
-
-		// 1. 최대값, 최소값 구하기 --> 변수저장
-		max = Math.max(num1, Math.max(num2, num3));
-		min = Math.min(num1, Math.min(num2, num3));
-
-		// 2. 최대값과 최소값은 평균(=중앙값) 구하기 --> 변수저장
-		middlePoint = (max + min) / 2.0;
-
-		// 3. 나머지값 구하기 --> 변수저장
-		otherwiseNum = num1 + num2 + num3 - max - min;
-
-		// 4. 판별한 값을 변수에 저장
-		isBtweenRanges = (otherwiseNum == middlePoint);
-
-		return isBtweenRanges;
-
-	} // isBtweenRanges
-
 	
 	
 	/*
-	 * 삽입 정렬
+	 *  2. 입력한 숫자 배열에 담아주기
 	 */
-	public static int[] insertSort(int[] arr) {
-
-		// 현재 값
-		int nowValue;
-
-		// index 변수.
-		int preIdex;
-
-		for (int i = 1; i < arr.length; i++) {
-
-			nowValue = arr[i];
-			preIdex = i - 1;
-
-			// 현재 선택된 원소가 이전 원소보다 작은 경우 + 이전 인덱스가 0과 같거나, 클 때
-			while (preIdex >= 0 && arr[preIdex] > nowValue) {
-
-				// 이전 인덱스 값을 현재 인덱스에 넣기
-				arr[preIdex + 1] = arr[preIdex];
-
-				// 다음 대상 원소를 탐색한다.
-				preIdex--;
-
-			}
-
-			// while 탈출 시점에 선택된 변수 값 저장.
-			arr[preIdex + 1] = nowValue;
-		}
-
-		return arr;
-
-	} // insertSort
-
+	public static List<Integer> splitStr (int nums) {
+		
+		List<String> list = new ArrayList<String>();
+		
+//		while ( indexNum > 0) {
+//			
+//			
+//		}
+		return null;
+	
+	} // 
+	
 } // end class
