@@ -108,4 +108,12 @@ public class Ex01 {
 				
 	} // isIntegerValue
 	
+	
+	/*
+	 * 4.float 숫자를 지정된 십진수로 반올림하는 Java 프로그램을 작성하십시오.
+	 */
+	public static int getIntegerToRound (float floatNum) {
+		
+	} // getIntegerToRound
+	
 } // end class
